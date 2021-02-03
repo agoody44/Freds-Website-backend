@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const dotenv = require('dotenv');
 
 // Create our express app
 const app = express();
@@ -28,8 +29,8 @@ app.post('/api/forma',(req,res) => {
         service:'Gmail',
         port:465,
         auth:{
-            user:'agoody44@gmail.com',
-            pass: ''
+            user:'process.env.EMAIL',
+            pass:'process.env.PASSWORD'
         }
     });
 
