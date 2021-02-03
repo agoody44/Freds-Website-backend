@@ -29,7 +29,7 @@ app.post('/api/forma',(req,res) => {
         port:465,
         auth:{
             user:'agoody44@gmail.com',
-            pass: 'Paisley8189'
+            pass: ''
         }
     });
 
