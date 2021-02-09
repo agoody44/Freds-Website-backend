@@ -3,12 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const dotenv = require('dotenv');
+
+
+require("dotenv").config();
 
 // Create our express app
 const app = express();
-
-// Configure the app (app.set)
 
 
 // Mount middleware (app.use)
@@ -23,10 +23,11 @@ app.get('/', function (req, res) {
     res.send('<h1>Hello World!</h1>');
 });
 
-app.post('/api/forma',(req,res) => {
+app.post('/api/form',(req,res) => {
+    console.log(req.body)
     let data = req.body
     let smtpTransport = nodemailer.createTransport({
-        service:'Gmail',
+        host:'gmail.com',
         port:465,
         auth:{
             user:'process.env.EMAIL',
@@ -36,7 +37,7 @@ app.post('/api/forma',(req,res) => {
 
 let mailOptions={
     from:data.email,
-    to:'agoody44@gmail.com',
+    to:'process.env.EMAIL',
     subject:`Message from ${data.name}`,
     html:`
     
@@ -53,9 +54,9 @@ let mailOptions={
     `
 };
 
-smtpTransport.sendMail(mailOptions, (error, response) => {
-    if(error){
-        res.send(error)
+smtpTransport.sendMail(mailOptions, (err, res) => {
+    if(err){
+        res.send('error')
     }
     else{
         res.send('Success')
@@ -71,3 +72,57 @@ const port = process.env.PORT || 3001;
 app.listen(port, function () {
     console.log(`Express is running on port: ${port}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+// const transporter = nodemailer.createTransport({
+//     host: 'smtp.gmail.com', //replace with your email provider
+//     port: 465,
+//     auth: {
+//         user: process.env.EMAIL,
+//         pass: process.env.PASSWORD
+//     }
+// });
+
+// verify connection configuration
+// transporter.verify(function(error, success) {
+//     if (error) {
+//         console.log(error);
+//     } else {
+//         console.log("Server is ready to take our messages");
+//     }
+// });
+
+// app.post('/api/forma', (req, res, next) => {
+// let name = req.body.name
+// let lastname = req.body.lastname
+// let email = req.body.email
+// let message = req.body.message
+
+// let mail = {
+//     from: name,
+//     to: process.env.EMAIL,
+//     // subject: subject,
+//     text: message,
+// }
+
+// transporter.sendMail(mail, (err, data) => {
+//     if (err) {
+//         res.json({
+//             status: 'fail'
+//     })
+// } else {
+//     res.json({
+//         status: 'success'
+//     })
+// }
+// })
+// })
