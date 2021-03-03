@@ -52,7 +52,7 @@ let mailOptions={
 };
 
 
-transporter.sendMail(mailOptions, (error, res)=>{
+transporter.sendMail(mailOptions, (error,response)=>{
 
     if(error){
         res.send(error)
