@@ -13,7 +13,7 @@ app.use(cors());
 
 
 app.get('/', (req, res)=>{
-    res.send('welcome to my forma');
+    res.send('welcome to my form');
 })
 
 app.post('/send', (req,res)=>{
@@ -40,7 +40,6 @@ let mailOptions={
     <h3>Informations</h3>
     <ul>
         <li>Name: ${data.name}</li>
-        <li>Lastname: ${data.lastname}</li>
         <li>Email: ${data.email}</li>
     
     </ul> 
